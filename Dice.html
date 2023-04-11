@@ -1,61 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Dice Roller</title>
-    <style>
-      #rollButton {
-        margin-top: 50px;
-        font-size: 24px;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-      #resultBox {
-        margin-top: 50px;
-        font-size: 48px;
-        text-align: center;
-        border: 1px solid #ccc;
-        padding: 20px;
-        border-radius: 5px;
-      }
-      #numDiceBox {
-        margin-top: 20px;
-        font-size: 18px;
-      }
-    </style>
-  </head>
-  <body>
-    <div>
-      <label for="numDiceBox">Number of Dice:</label>
-      <input type="number" id="numDiceBox" value="1" min="1" max="10">
-    </div>
-    <div>
-      <button id="rollButton">Roll</button>
-    </div>
-    <div>
-      <input type="text" id="resultBox" readonly>
-    </div>
-    <script>
-      var rollButton = document.getElementById("rollButton");
-      var resultBox = document.getElementById("resultBox");
-      var numDiceBox = document.getElementById("numDiceBox");
+<head>
+	<title>Dice Roller</title>
+</head>
+<body>
+	<label for="numDice">Number of dice:</label>
+	<input type="number" id="numDice" name="numDice" min="1" value="1">
+	<button onclick="rollDice()">Roll Dice</button>
+	<p id="result"></p>
 
-      function rollDice() {
-        var numDice = parseInt(numDiceBox.value);
-        var diceValues = [0, 0, 1, 1, 2, 2];
-        var sum = 0;
-        for (var i = 0; i < numDice; i++) {
-          var roll = diceValues[Math.floor(Math.random() * diceValues.length)];
-          sum += roll;
-        }
-        resultBox.value = sum;
-      }
-
-      rollButton.addEventListener("click", rollDice);
-    </script>
-  </body>
+	<script>
+		function rollDice() {
+			const numDice = document.getElementById("numDice").value;
+			let sum = 0;
+			for (let i = 0; i < numDice; i++) {
+				const roll = Math.floor(Math.random() * 6); // rolls a number between 0 and 5
+				if (roll === 0 || roll === 1) {
+					sum += 0;
+				} else {
+					sum += 1;
+				}
+			}
+			document.getElementById("result").textContent = `${numDice} dice: ${sum}`;
+		}
+	</script>
+</body>
 </html>
